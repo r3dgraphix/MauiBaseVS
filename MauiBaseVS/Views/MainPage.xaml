@@ -28,6 +28,17 @@
                 FontSize="18"
                 HorizontalOptions="Center" />
 
+            <CollectionView  x:Name="TestCollectionView" SelectionMode="Multiple" SelectionChangedCommand="{Binding SelectionChangedCommand}" SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference TestCollectionView}}" ItemsSource="{Binding UserDetailsList}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Spacing="20" Padding="20" Orientation="Horizontal">
+                            <Label Text="{Binding Name}"/>
+                            <Label Text="{Binding Location}"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView> 
+
             <Button
                 x:Name="CounterBtn"
                 Text="Click me"
