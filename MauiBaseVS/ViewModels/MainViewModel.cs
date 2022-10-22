@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -11,30 +12,48 @@ namespace MauiBaseVS.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        private List<UserDetails> _DetailsList = new List<UserDetails>();
 
-        private List<UserDetails> _userDetailsList = new List<UserDetails>();
-
-        public List<UserDetails> UserDetailsList
+        public List<UserDetails> DetailsList
         {
-            get => _userDetailsList;
+            get => _DetailsList;
 
             set
             {
-                _userDetailsList = value;
+                _DetailsList = value;
                 OnPropertyChanged();
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string param = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(param));
+        }
+
+        //private UserDetails _userDetails = new UserDetails();
+        //public UserDetails UserDetails
+        //{
+        //    get => _userDetails;
+        //    set
+        //    {
+        //        _userDetails = value;
+        //        OnPropertyChanged(nameof(UserDetails));
+        //    }
+        //}
+
+        //private void OnPropertyChanged() =>
+        //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs());
+
+        public ICommand MultipleSelectionCommand => new Command<IList<object>>((obj) =>
+        {
+            List<UserDetails> users = new List<UserDetails>();
             
-        }
-
-        private void OnPropertyChanged()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICommand SelectionChangedCommand => new Command<object>((obj) =>
-        {
-            var selectedItem = obj as UserDetails;
+            foreach(var item in obj)
+            {
+                var selectedItems = item as UserDetails;
+                users.Add(selectedItems);
+            }
         });
 
         public MainViewModel()
@@ -51,7 +70,7 @@ namespace MauiBaseVS.ViewModels
             detailsList.Add(new UserDetails { Name = "Tom", Location = "Nebraska" });
             detailsList.Add(new UserDetails { Name = "William", Location = "Arizonia" });
 
-            UserDetailsList = detailsList;
+            DetailsList = detailsList;
         }
     }
 }
