@@ -2,8 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiBaseVS.MainPage"
+             xmlns:model="clr-namespace:MauiBaseVS.Models"
              xmlns:viewmodel="clr-namespace:MauiBaseVS.ViewModels"
              x:DataType="viewmodel:MainViewModel">
+
+    <ContentPage.BindingContext>
+        <viewmodel:MainViewModel/>
+    </ContentPage.BindingContext>
 
     <ScrollView>
         <VerticalStackLayout
@@ -17,15 +22,24 @@
                 HeightRequest="200"
                 HorizontalOptions="Center" />
 
-            <CollectionView x:DataType="{x:Null}"  x:Name="TestCollectionView" SelectionMode="Multiple" SelectionChangedCommand="{Binding MultipleSelectionCommand}" SelectionChangedCommandParameter="{Binding SelectedItems, Mode=TwoWay, Source={x:Reference TestCollectionView}}" ItemsSource="{Binding DetailsList}">
+            <CollectionView x:Name="TestCollectionView" SelectionMode="Multiple" SelectionChangedCommand="{Binding MultipleSelectionCommand}" SelectionChangedCommandParameter="{Binding SelectedItems, Mode=TwoWay, Source={x:Reference TestCollectionView}}" ItemsSource="{Binding DetailsList}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="model:UserDetails">
                         <StackLayout Spacing="20" Padding="20" Orientation="Horizontal">
                             <Label Text="{Binding Name}"/>
                             <Label Text="{Binding Location}"/>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate x:DataType="{x:Null}">
+                        <ViewCell>
+                            <StackLayout Spacing="20" Padding="20" Orientation="Horizontal">
+                                <Label Text="{Binding Key}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
             </CollectionView> 
 
             <Button
