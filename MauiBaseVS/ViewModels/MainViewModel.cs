@@ -25,25 +25,24 @@ namespace MauiBaseVS.ViewModels
             }
         }
 
+        private List<UserDetails1> _DetailsList1 = new List<UserDetails1>();
+
+        public List<UserDetails1> DetailsList1
+        {
+            get => _DetailsList1;
+
+            set
+            {
+                _DetailsList1 = value;
+                OnPropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string param = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(param));
         }
-
-        //private UserDetails _userDetails = new UserDetails();
-        //public UserDetails UserDetails
-        //{
-        //    get => _userDetails;
-        //    set
-        //    {
-        //        _userDetails = value;
-        //        OnPropertyChanged(nameof(UserDetails));
-        //    }
-        //}
-
-        //private void OnPropertyChanged() =>
-        //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs());
 
         public ICommand MultipleSelectionCommand => new Command<IList<object>>((obj) =>
         {
@@ -71,6 +70,15 @@ namespace MauiBaseVS.ViewModels
             detailsList.Add(new UserDetails { Name = "William", Location = "Arizonia" });
 
             DetailsList = detailsList;
+
+            List<UserDetails1> details1List = new List<UserDetails1>();
+
+            details1List.Add(new UserDetails1 { Name = "Smith", Location = "Utah" });
+            details1List.Add(new UserDetails1 { Name = "Tyan", Location = "Ohio" });
+            details1List.Add(new UserDetails1 { Name = "Wacky", Location = "Idaho" });
+            details1List.Add(new UserDetails1 { Name = "Will", Location = "California" });
+
+            DetailsList1 = details1List;
         }
     }
 }

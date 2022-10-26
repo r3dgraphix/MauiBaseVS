@@ -31,16 +31,20 @@
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-                <CollectionView.GroupHeaderTemplate>
-                    <DataTemplate x:DataType="{x:Null}">
-                        <ViewCell>
-                            <StackLayout Spacing="20" Padding="20" Orientation="Horizontal">
-                                <Label Text="{Binding Key}"/>
-                            </StackLayout>
-                        </ViewCell>
+            </CollectionView>
+
+            <Label Text="=========================================================================" FontSize="Large" />
+
+            <CollectionView x:Name="Test1CollectionView" SelectionMode="Multiple" SelectionChangedCommand="{Binding MultipleSelectionCommand}" SelectionChangedCommandParameter="{Binding SelectedItems, Mode=TwoWay, Source={x:Reference Test1CollectionView}}" ItemsSource="{Binding DetailsList}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:UserDetails1">
+                        <StackLayout Spacing="20" Padding="20" Orientation="Horizontal">
+                            <Label Text="{Binding Name}"/>
+                            <Label Text="{Binding Location}"/>
+                        </StackLayout>
                     </DataTemplate>
-                </CollectionView.GroupHeaderTemplate>
-            </CollectionView> 
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
             <Button
                 x:Name="CounterBtn"
