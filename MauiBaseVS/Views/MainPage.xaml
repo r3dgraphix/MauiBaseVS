@@ -22,7 +22,7 @@
                 HeightRequest="200"
                 HorizontalOptions="Center" />
 
-            <CollectionView x:Name="TestCollectionView" SelectionMode="Multiple" SelectionChangedCommand="{Binding MultipleSelectionCommand}" SelectionChangedCommandParameter="{Binding SelectedItems, Mode=TwoWay, Source={x:Reference TestCollectionView}}" ItemsSource="{Binding DetailsList}">
+            <CollectionView HeightRequest="200" x:Name="TestCollectionView" SelectionMode="Multiple" SelectionChangedCommand="{Binding MultipleSelectionCommand}" SelectionChangedCommandParameter="{Binding SelectedItems, Mode=TwoWay, Source={x:Reference TestCollectionView}}" ItemsSource="{Binding DetailsList}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:UserDetails">
                         <StackLayout Spacing="20" Padding="20" Orientation="Horizontal">
@@ -35,16 +35,18 @@
 
             <Label Text="=========================================================================" FontSize="Large" />
 
-            <CollectionView x:Name="Test1CollectionView" SelectionMode="Multiple" SelectionChangedCommand="{Binding MultipleSelectionCommand}" SelectionChangedCommandParameter="{Binding SelectedItems, Mode=TwoWay, Source={x:Reference Test1CollectionView}}" ItemsSource="{Binding DetailsList}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:UserDetails1">
-                        <StackLayout Spacing="20" Padding="20" Orientation="Horizontal">
-                            <Label Text="{Binding Name}"/>
-                            <Label Text="{Binding Location}"/>
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            <StackLayout>
+                <CollectionView HeightRequest="200" x:Name="Test1CollectionView" SelectionMode="Multiple" SelectionChangedCommand="{Binding MultipleSelectionCommand}" SelectionChangedCommandParameter="{Binding SelectedItems, Mode=TwoWay, Source={x:Reference Test1CollectionView}}" ItemsSource="{Binding DetailsList}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:UserDetails1">
+                            <StackLayout Spacing="20" Padding="20" Orientation="Horizontal">
+                                <Label Text="{Binding Name}"/>
+                                <Label Text="{Binding Location}"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
 
             <Button
                 x:Name="CounterBtn"
